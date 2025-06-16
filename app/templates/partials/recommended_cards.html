@@ -1,0 +1,27 @@
+{% for movie in recommendations %}
+<div class="col">
+    <a href="{{ url_for('movie.movie_page', movie_id=movie.movieId) }}" class="text-decoration-none">
+        <div class="card rec-card h-100">
+            {% if movie.poster_url %}
+                <img src="{{ movie.poster_url }}" class="card-img-top rec-poster" alt="{{ movie.title }}">
+            {% else %}
+                <div class="card-img-top bg-secondary text-white text-center p-5">
+                    <span>No Image</span>
+                </div>
+            {% endif %}
+            <div class="card-body px-3 py-2">
+                <h6 class="card-title mb-1">{{ movie.title }}</h6>
+                <p class="card-text small text-muted mb-2">
+                    {% if movie.release_year %}{{ movie.release_year }} &bullet; {% endif %}
+                    ⭐ {{ movie.vote_average }}
+                </p>
+                <div>
+                    {% for genre in movie.genre_list[:2] %}
+                        <span class="badge me-1 small">{{ genre }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+{% endfor %}

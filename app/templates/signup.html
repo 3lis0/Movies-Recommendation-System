@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="col-md-6 bg-dark p-4 rounded-4 shadow border border-secondary-subtle">
+        <h2 class="mb-4 text-light">Sign Up</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label text-light">Username</label>
+                <input name="username" class="form-control bg-dark text-light border-secondary" required>
+            </div>
+            <div class="mb-4">
+                <label class="form-label text-light">Password</label>
+                <input type="password" name="password" class="form-control bg-dark text-light border-secondary" required>
+            </div>
+            <button class="btn btn-outline-light w-100">Sign Up</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

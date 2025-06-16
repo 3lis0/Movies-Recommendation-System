@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row g-4">
+        <!-- Poster -->
+        <div class="col-md-4">
+            {% if movie.poster_url %}
+                <img src="{{ movie.poster_url }}" class="img-fluid rounded shadow poster-img" alt="{{ movie.title }}">
+            {% else %}
+                <div class="bg-secondary text-white text-center p-5 rounded">
+                    <span>No Poster Available</span>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Movie Details -->
+        <div class="col-md-8">
+            <h2 class="text-light">{{ movie.title }}</h2>
+            {% if movie.tagline %}
+                <p class="fst-italic text-muted mb-2">“{{ movie.tagline }}”</p>
+            {% endif %}
+
+            <div class="mb-3">
+                {% for genre in movie.genres %}
+                    <span class="badge text-bg-dark me-1">{{ genre }}</span>
+                {% endfor %}
+            </div>
+
+            <ul class="list-inline text-muted small mb-4">
+                {% if movie.release_year %}<li class="list-inline-item">📅 {{ movie.release_year }}</li>{% endif %}
+                {% if movie.runtime %}<li class="list-inline-item">🕒 {{ movie.runtime }} min</li>{% endif %}
+                <li class="list-inline-item">⭐ {{ movie.vote_average }} / 10</li>
+                <li class="list-inline-item">🎟️ {{ movie.vote_count }} votes</li>
+            </ul>
+
+            <h5 class="text-light">Overview</h5>
+            <p class="text-muted">{{ movie.overview or "No overview available." }}</p>
+        </div>
+    </div>
+
+    <!-- Recommendations -->
+    {% if recommendations %}
+    <hr class="my-5 border-light-subtle">
+    <h4 class="mb-4 text-light">You may also like</h4>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% include 'partials/recommended_cards.html' %}
+
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
