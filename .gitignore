@@ -1,2 +1,6 @@
-**/__pycache__/
-notebook.ipynb
+# **/__pycache__/
+# notebook.ipynb
+
+
+.history
+.venv
