@@ -15,12 +15,13 @@ MOVIES_PER_PAGE = 48
 def index():
     genre_filter = request.args.get('genre')
     sort_by = request.args.get('sort', 'vote_average')
+    order = request.args.get('order', 'desc')
     page = int(request.args.get('page', 0))
 
     start = page * MOVIES_PER_PAGE
     limit = MOVIES_PER_PAGE
 
-    movies = process_movies(movies_df, genre_filter, sort_by, limit + 1, start=start)
+    movies = process_movies(movies_df, genre_filter, sort_by, order, limit + 1, start=start)
 
     has_more = len(movies) > limit
     movies = movies[:limit]
@@ -32,7 +33,8 @@ def index():
         selected_genre=genre_filter or 'All',
         selected_sort=sort_by,
         current_page=page,
-        has_more=has_more
+        has_more=has_more,
+        order=order
     )
 
 @homepage_bp.route('/load_more_movies')

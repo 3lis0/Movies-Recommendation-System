@@ -21,6 +21,11 @@ class ImageInfo:
         self.poster_sizes = PosterSizes()
         self.backdrop_sizes = BackdropSizes()
         
-    def get_url(self, size: str, path: str) -> str:
+    def get_url(self, size: str, path: str, backdrop = False) -> str:
+        if not path or str(path)=='nan':
+            if backdrop:
+                return None
+            else:
+                return "https://placehold.co/342x513?text=Poster\\nunavailable"
         return f"{self.IMAGE_BASE_URL}/{size}{path}"
         

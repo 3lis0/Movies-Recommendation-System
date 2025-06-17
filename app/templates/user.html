@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="text-light p-4 rounded-3 shadow-sm h-100">
+                <h2 class="mb-3">{{ username }}</h2>
+                <p class="mb-2">🎬 Rated <strong>{{ num_ratings }}</strong> movies so far</p>
+                <p>⭐ Tends to rate around <strong>{{ avg_rating }}</strong> on average</p>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <h4 class="mb-3">Rating History</h4>
+            <div class="bg-dark rounded-3 shadow-sm p-0 border border-dark-subtle overflow-hidden">
+                <div class="table-responsive" style="max-height: 450px; overflow-y: auto;" id="ratings-table">
+                    <table class="table table-dark table-hover align-middle mb-0">
+                        <thead class="table-dark text-light sticky-top">
+                            <tr>
+                                <th>Poster</th>
+                                <th>Movie</th>
+                                <th>User Rating</th>
+                                <th>Average Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ratings-body">
+                            {% include 'partials/user_ratings_rows.html' %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Load More -->
+            {% if has_more %}
+            <div class="text-center mt-4">
+                <button id="load-more-ratings" class="btn btn-outline-light px-5" data-page="1"
+                        data-user="{{ user_id }}">
+                    Load More
+                </button>
+            </div>
+            {% endif %}
+
+            <!-- Recommended Movies -->
+        </div>
+    </div>
+    {% include 'partials/recommended_cards.html' %}
+</div>
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const loadBtn = document.getElementById("load-more-ratings");
+        const tbody = document.getElementById("ratings-body");
+
+        loadBtn?.addEventListener("click", async () => {
+            const page = parseInt(loadBtn.dataset.page);
+            const userId = loadBtn.dataset.user;
+
+            loadBtn.disabled = true;
+            loadBtn.textContent = "Loading...";
+
+            const res = await fetch(`/user/${userId}/load_more?page=${page}`);
+            const data = await res.json();
+
+            tbody.insertAdjacentHTML("beforeend", data.html);
+
+            if (data.has_more) {
+                loadBtn.dataset.page = page + 1;
+                loadBtn.disabled = false;
+                loadBtn.textContent = "Load More";
+            } else {
+                loadBtn.remove();
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}
+

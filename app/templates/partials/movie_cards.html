@@ -1,5 +1,6 @@
 {% for movie in movies %}
 <div class="col">
+    <a href="{{ url_for('movie.movie_page', movie_id=movie.movieId) }}" class="text-decoration-none text-light">
     <div class="card h-100 shadow-sm border-0">
         {% if movie.poster_url %}
             <img src="{{ movie.poster_url }}" class="card-img-top rounded-top" alt="{{ movie.title }}">
@@ -14,15 +15,14 @@
                 <p class="card-text mb-2 text-muted">
                     <small>{{ movie.release_year or "Unknown year" }}</small> &nbsp; • &nbsp; ⭐ {{ movie.vote_average }}
                 </p>
-                <div class="mb-3">
+                <div class="">
                     {% for genre in movie.genre_list %}
                         <span class="badge rounded-pill text-bg-dark me-1">{{ genre }}</span>
                     {% endfor %}
                 </div>
             </div>
-            <a href="{{ url_for('movie.movie_page', movie_id=movie.movieId) }}"
-               class="btn btn-sm btn-outline-light w-100 mt-auto">View</a>
         </div>
     </div>
+    </a>
 </div>
 {% endfor %}

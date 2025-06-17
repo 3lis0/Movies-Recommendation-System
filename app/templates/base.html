@@ -139,6 +139,57 @@
             border-top-left-radius: 0.6rem;
             border-top-right-radius: 0.6rem;
         }
+
+
+        .movie-hero {
+            position: relative;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .movie-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(18, 18, 18, 0.4) 0%, rgba(18, 18, 18, 1) 90%);
+        }
+
+        #star-container .star {
+            font-size: 1.5rem;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        #star-container .star:hover,
+        #star-container .star.hovered,
+        #star-container .star.selected {
+            color: #ffc107;
+            /* Bootstrap star gold */
+        }
+
+        form select#top_n {
+            width: auto;
+            min-width: 80px;
+        }
+
+        .user-card {
+            background-color: #2a2a2a;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-radius: 0.75rem;
+        }
+
+        .user-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+        }
+        .user-card .card-title{
+            font-size: x-large;
+        }
     </style>
 </head>
 
@@ -160,8 +211,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.endpoint == 'user.list_users' %}active{% endif %}"
-                            href="">Users</a>
+                            href="{{ url_for('users.list_users') }}">Users</a>
                     </li>
+
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.endpoint == 'user.profile' %}active{% endif %}"
