@@ -1,0 +1,4 @@
+ipykernel==6.29.5
+scikit-learn==1.7.0
+pandas==2.3.0
+matplotlib==3.10.3
