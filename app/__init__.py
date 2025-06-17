@@ -34,5 +34,11 @@ def create_app():
     
     from app.routes.movie import movie_bp
     app.register_blueprint(movie_bp)
+    
+    from app.routes.users import users_bp
+    app.register_blueprint(users_bp)
+    
+    from app.routes.user import user_bp
+    app.register_blueprint(user_bp)
 
     return app

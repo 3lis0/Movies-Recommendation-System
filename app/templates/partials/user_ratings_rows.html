@@ -1,0 +1,18 @@
+{% for r in ratings %}
+
+<tr>
+    <td style="width: 40px;">
+        <a href="{{ url_for('movie.movie_page', movie_id=r.movieId) }}" class="text-decoration-none text-light">
+            <img src="{{ r.poster_url }}" class="img-fluid rounded" alt="{{ r.title }}">
+        </a>
+    </td>
+    <td>
+        <a href="{{ url_for('movie.movie_page', movie_id=r.movieId) }}" class="text-light">
+            {{ r.title }}
+        </a>
+    </td>
+    <td>⭐ {{ r.user_rating }}</td>
+    <td>⭐ {{ r.vote_average }}</td>
+</tr>
+
+{% endfor %}

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <!-- Filter Form -->
+    <form method="GET" class="row g-3 mb-4 bg-dark p-4 rounded-3 shadow-sm border border-secondary-subtle">
+        <div class="col-md-4">
+            <label class="form-label text-light">Min Movies Rated</label>
+            <select name="min_rated" class="form-select bg-dark text-light border-secondary">
+                <option value="0" {% if min_rated==0 %}selected{% endif %}>All</option>
+                <option value="10" {% if min_rated==10 %}selected{% endif %}>10+</option>
+                <option value="50" {% if min_rated==50 %}selected{% endif %}>50+</option>
+                <option value="100" {% if min_rated==100 %}selected{% endif %}>100+</option>
+                <option value="200" {% if min_rated==200 %}selected{% endif %}>200+</option>
+                <option value="500" {% if min_rated==500 %}selected{% endif %}>500+</option>
+                <option value="1000" {% if min_rated==1000 %}selected{% endif %}>1000+</option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label text-light">Sort by</label>
+            <select name="sort" class="form-select bg-dark text-light border-secondary">
+                <option value="userId" {% if sort_by=='userId' %}selected{% endif %}>User ID</option>
+                <option value="num_rated_movies" {% if sort_by=='num_rated_movies' %}selected{% endif %}># Movies Rated
+                </option>
+                <option value="avg_rating_given" {% if sort_by=='avg_rating_given' %}selected{% endif %}>Average Rating
+                </option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label text-light">Order</label>
+            <select name="order" class="form-select bg-dark text-light border-secondary">
+                <option value="asc" {% if sort_order=='asc' %}selected{% endif %}>Ascending</option>
+                <option value="desc" {% if sort_order=='desc' %}selected{% endif %}>Descending</option>
+            </select>
+        </div>
+
+        <div class="col-md-2 align-self-end">
+            <button class="btn btn-outline-light w-100">Apply</button>
+        </div>
+    </form>
+
+    <!-- User Grid -->
+    <div id="user-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% include 'partials/user_cards.html' %}
+    </div>
+
+    <!-- Load More Button -->
+    {% if has_more %}
+    <div class="text-center mt-4">
+        <button id="load-more-users" class="btn btn-outline-light px-5" data-page="1" data-min-rated="{{ min_rated }}"
+            data-sort="{{ sort_by }}" data-order="{{ sort_order }}">
+            Load More
+        </button>
+    </div>
+    {% endif %}
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const loadBtn = document.getElementById("load-more-users");
+        const grid = document.getElementById("user-grid");
+
+        if (!grid) {
+            console.error("Missing #user-grid element");
+            return;
+        }
+
+        loadBtn?.addEventListener("click", async () => {
+            const page = parseInt(loadBtn.dataset.page);
+            const minRated = loadBtn.dataset.minRated;
+            const sort = loadBtn.dataset.sort;
+            const order = loadBtn.dataset.order;
+
+            loadBtn.disabled = true;
+            loadBtn.textContent = "Loading...";
+
+            const params = new URLSearchParams({
+                min_rated: minRated,
+                sort: sort,
+                order: order,
+                page: page
+            });
+
+            const res = await fetch(`/users/load_more_users?${params}`);
+            const data = await res.json();
+
+            grid.insertAdjacentHTML("beforeend", data.html);
+
+            if (data.has_more) {
+                loadBtn.dataset.page = page + 1;
+                loadBtn.disabled = false;
+                loadBtn.textContent = "Load More";
+            } else {
+                loadBtn.remove();
+            }
+        });
+    });
+</script>
+
+{% endblock %}

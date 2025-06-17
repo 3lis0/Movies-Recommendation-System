@@ -4,12 +4,12 @@
 <div class="container mt-5">
     <!-- Filter Form -->
     <form method="GET" class="row g-3 mb-4 bg-dark p-4 rounded-3 shadow-sm border border-secondary-subtle">
-        <div class="col-md-5">
+        <div class="col-md-4">
             <label class="form-label text-light">Genre</label>
             <select name="genre" class="form-select bg-dark text-light border-secondary">
                 <option value="All">All</option>
                 {% for genre in all_genres %}
-                    <option value="{{ genre }}" {% if genre==selected_genre %}selected{% endif %}>{{ genre }}</option>
+                <option value="{{ genre }}" {% if genre==selected_genre %}selected{% endif %}>{{ genre }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -19,26 +19,33 @@
             <select name="sort" class="form-select bg-dark text-light border-secondary">
                 <option value="vote_average" {% if selected_sort=='vote_average' %}selected{% endif %}>Rating</option>
                 <option value="popularity" {% if selected_sort=='popularity' %}selected{% endif %}>Popularity</option>
-                <option value="release_year" {% if selected_sort=='release_year' %}selected{% endif %}>Release Year</option>
+                <option value="release_year" {% if selected_sort=='release_year' %}selected{% endif %}>Release Year
+                </option>
                 <option value="title" {% if selected_sort=='title' %}selected{% endif %}>Title A-Z</option>
             </select>
         </div>
-
-        <div class="col-md-3 align-self-end">
+        <div class="col-md-2">
+            <label class="form-label text-light">Order</label>
+            <select name="order" class="form-select bg-dark text-light border-secondary">
+                <option value="asc" {% if order=='asc' %}selected{% endif %}>Ascending</option>
+                <option value="desc" {% if order=='desc' %}selected{% endif %}>Descending</option>
+            </select>
+        </div>
+        <div class="col-md-2 align-self-end">
             <button class="btn btn-outline-light w-100">Apply</button>
         </div>
     </form>
 
     <!-- Movie Grid -->
-    <div id="movie-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    <div id="movie-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
         {% include 'partials/movie_cards.html' %}
     </div>
 
     <!-- Load More Button -->
     {% if has_more %}
     <div class="text-center mt-4">
-        <button id="load-more-btn" class="btn btn-outline-light px-5" data-page="1"
-            data-genre="{{ selected_genre }}" data-sort="{{ selected_sort }}">
+        <button id="load-more-btn" class="btn btn-outline-light px-5" data-page="1" data-genre="{{ selected_genre }}"
+            data-sort="{{ selected_sort }}">
             Load More
         </button>
     </div>
