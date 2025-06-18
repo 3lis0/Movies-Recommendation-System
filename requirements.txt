@@ -2,3 +2,5 @@ ipykernel==6.29.5
 scikit-learn==1.7.0
 pandas==2.3.0
 matplotlib==3.10.3
+requests==2.32.4
+python-dotenv==1.1.0
