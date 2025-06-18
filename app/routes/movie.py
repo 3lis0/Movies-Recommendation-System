@@ -1,11 +1,12 @@
 from flask import Blueprint, render_template, request, abort, redirect, url_for
 from app.utils.movie_processor import get_movie_details, get_minimal_movie_cards
 from app.utils.ratings import get_user_rating
-from app.recommender.random_recommender import get_recommended_ids
+from app.recommender.recommender import get_recommended_ids
 from flask_login import current_user,login_required
 from app.models import Rating
 from app import db
 import pandas as pd
+from datetime import datetime
 
 movie_bp = Blueprint('movie', __name__)
 movies_df = pd.read_csv("data/new_movies.csv")
@@ -28,11 +29,21 @@ def movie_page(movie_id):
 @login_required
 def rate_movie(movie_id):
     rating_value = int(request.form.get("rating", 0))
+    now = datetime.utcnow()
+
     rating = Rating.query.filter_by(user_id=current_user.id, movie_id=movie_id).first()
     if rating:
         rating.rating = rating_value
+        rating.timestamp = now  # update timestamp
     else:
-        rating = Rating(user_id=current_user.id, movie_id=movie_id, rating=rating_value)
+        rating = Rating(
+            user_id=current_user.id,
+            movie_id=movie_id,
+            rating=rating_value,
+            timestamp=now  # insert timestamp
+        )
         db.session.add(rating)
+
     db.session.commit()
     return redirect(url_for("movie.movie_page", movie_id=movie_id))
+

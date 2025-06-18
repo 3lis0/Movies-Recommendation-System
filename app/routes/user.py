@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, jsonify
 from app.utils.movie_processor import process_user_ratings, get_minimal_movie_cards
 import pandas as pd
-from app.recommender.random_recommender import get_recommended_ids_for_user
+from app.recommender.recommender import SVD_reccomendation, FM_recommendations
 
 user_bp = Blueprint("user", __name__, url_prefix="/user")
 user_df = pd.read_csv('data/user_metadata.csv')
@@ -21,7 +21,7 @@ def user_profile(user_id):
     num_ratings = int(user_info["num_rated_movies"])
     avg_rating = round(user_info["avg_rating_given"], 2)
     top_n = int(request.args.get("top_n", 6))
-    recommended_ids = get_recommended_ids_for_user(user_id, top_n)
+    recommended_ids, _ = SVD_reccomendation(user_id, top_n)
     recommendations = get_minimal_movie_cards(recommended_ids, movies_df)
 
     # Get ratings for this page
