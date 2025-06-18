@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, abort, redirect, url_for
 from app.utils.movie_processor import get_movie_details, get_minimal_movie_cards
 from app.utils.ratings import get_user_rating
-from app.recommender.recommender import get_recommended_ids
+from app.recommender.recommender import get_recommended_ids, recommend_similar_movies
 from flask_login import current_user,login_required
 from app.models import Rating
 from app import db
@@ -20,7 +20,7 @@ def movie_page(movie_id):
     movie = get_movie_details(movie_id, movies_df)
     if not movie:
         abort(404)
-    recommended_ids = get_recommended_ids(movie_id, top_n)
+    recommended_ids,_ = recommend_similar_movies(movie_id, top_n, 2)
     recommendations = get_minimal_movie_cards(recommended_ids, movies_df)
 
     return render_template("movie.html", movie=movie, recommendations=recommendations, top_n=top_n, user_rating=user_rating, message = 'You may also like')

@@ -158,3 +158,41 @@ def lightFM_recommendations(user_id: int, top_n: int):
 
     return top_movie_ids, top_scores.tolist()
 
+import numpy as np
+import joblib
+from sklearn.metrics.pairwise import cosine_similarity
+import random
+
+def recommend_similar_movies(movie_id, top_n=10, randomness_factor=2):
+    # === Load features and mappings ===
+    final_features = np.load("app/recommender/cosine_similarity/final_features.npy")
+    movie_id_to_index = joblib.load("app/recommender/cosine_similarity/movie_id_to_index.pkl")
+    index_to_movie_id = joblib.load("app/recommender/cosine_similarity/index_to_movie_id.pkl")
+
+    if movie_id not in movie_id_to_index:
+        raise ValueError("Movie ID not found in the dataset.")
+
+    idx = movie_id_to_index[movie_id]
+    movie_vector = final_features[idx].reshape(1, -1)
+
+    # === Compute cosine similarity with all movies ===
+    sim_scores = cosine_similarity(movie_vector, final_features)[0]
+
+    # Get top (top_n * randomness_factor) indices, excluding self
+    pool_size = top_n * randomness_factor
+    top_pool_indices = sim_scores.argsort()[::-1]
+    top_pool_indices = [i for i in top_pool_indices if i != idx][:pool_size]
+
+    # Randomly select top_n
+    selected_indices = random.sample(top_pool_indices, top_n)
+
+    # Extract IDs and scores
+    similar_movie_ids = [index_to_movie_id[i] for i in selected_indices]
+    similar_scores = [round(sim_scores[i], 4) for i in selected_indices]
+
+    # Sort by similarity descending
+    sorted_pairs = sorted(zip(similar_movie_ids, similar_scores), key=lambda x: -x[1])
+    sorted_movie_ids, sorted_scores = zip(*sorted_pairs)
+
+    return list(sorted_movie_ids), list(sorted_scores)
+
