@@ -84,4 +84,75 @@ $ pip install -r requirements.txt
 
 ---
 
+## Project Tree 
 
+```bash 
+Movies-Recommendation-System/
+├── app/                          # Main application code
+│   ├── __init__.py
+│   ├── models.py
+│   ├── db.sqlite3                # Local SQLite DB (optional)
+│
+│   ├── recommender/             # Recommendation models and logic
+│   │   ├── recommender.py
+│   │   ├── svd_model.pkl
+│   │   ├── cosine_similarity/
+│   │   ├── factorization_model/
+│   │   └── lightFM_model/
+│
+│   ├── routes/                  # Flask route handlers (blueprints)
+│   │   ├── __init__.py
+│   │   ├── auth.py
+│   │   ├── homepage.py
+│   │   ├── movie.py
+│   │   ├── user.py
+│   │   └── users.py
+│
+│   ├── templates/               # HTML templates (Jinja2)
+│   │   ├── base.html
+│   │   ├── index.html
+│   │   ├── login.html
+│   │   ├── signup.html
+│   │   ├── movie.html
+│   │   ├── user.html
+│   │   ├── users.html
+│   │   └── partials/            # Reusable HTML snippets
+│
+│   ├── utils/                   # Data processing helpers
+│       ├── helpers.py
+│       ├── image_info.py
+│       ├── loader.py
+│       ├── movie_processor.py
+│       ├── ratings.py
+│       └── user_processor.py
+│
+├── data/                        # Datasets (movies, ratings, metadata)
+│   ├── movies.csv
+│   ├── ratings.csv
+│   ├── tags.csv
+│   └── ...                      # Other processed CSVs
+│
+├── NoteBooks/                   # Test & experimentation notebooks 📓
+│   └── ...                      # (Notebooks used during development)
+│
+├── scripts/                     # Utility scripts
+│   └── init_db.py
+│
+├── run.py                       # Main entry point
+├── requirements.txt             # Project dependencies
+├── runtime.txt                  # Deployment config (e.g., Heroku)
+├── README.md                    # Project documentation
+└── tests/                       # (Optional) Unit test folder
+``` 
+
+
+---
+## ▶️ How to Run the App
+
+```bash
+# Activate the conda environment
+conda activate myenv
+
+# Run the Flask app
+python run.py
+---
