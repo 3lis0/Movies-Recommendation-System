@@ -14,7 +14,7 @@ Build an interactive system that:
 ## 👥 Team Members
 
 - **Israa Abdelghany**  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](www.linkedin.com/in/israa-abdelghany) [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat&logo=github)](https://github.com/IsraaAbdelghany9)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/israa-abdelghany/) [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat&logo=github)](https://github.com/IsraaAbdelghany9)
 
 - **Ali Adel**  
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/ali-adel-84b390101) [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat&logo=github)](https://github.com/adelian14)
