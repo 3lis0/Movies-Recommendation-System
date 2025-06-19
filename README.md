@@ -2,15 +2,6 @@
 
 This project is a movie recommender system built using the MovieLens dataset. It includes two main features: personalized user recommendations using collaborative filtering models like Factorization Machines and LightFM, and item-based similarity recommendations using cosine similarity. A user-friendly dashboard allows users to explore top-N movie recommendations, view other users' preferences, and interact with movie metadata. This system is designed for educational purposes and demonstrates a complete pipeline—from data processing to model deployment. 
 
-## 📌 Objective
-
-Build an interactive system that:
-- Recommends top-N items to a selected user using advanced recommendation models.
-- Displays movie metadata and retrieves similar items based on similarity scores
-- Allows users to browse others' preferences for inspiration (inspired by apps like Spotify/Anghami)
-- Offers intuitive UI for navigating recommendations
-
-
 ## 👥 Team Members
 
 - **Israa Abdelghany**  
@@ -24,6 +15,29 @@ Build an interactive system that:
 
 - **Omar Ayman**  
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/omar-elgema3y) [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat&logo=github)](https://github.com/OmarrAymann)
+
+
+## 📌 Objective
+
+Build an interactive system that:
+- Recommends top-N items to a selected user using advanced recommendation models.
+- Displays movie metadata and retrieves similar items based on similarity scores
+- Allows users to browse others' preferences for inspiration (inspired by apps like Spotify/Anghami)
+- Offers intuitive UI for navigating recommendations
+
+
+## 📁 Dataset
+
+- **Source**: [MovieLens  Dataset (100k ratings)](https://grouplens.org/datasets/movielens/)
+- **Contents**:
+  - `user_metadata.csv`: User IDs and avg ratings, ..etc
+  - `movies.csv`: Movie metadata (title, genres)
+  - `ratings.csv`: User-item rating matrix
+  - `new_movies.csv`: Preprocessed movie features (before feature selection)
+  - `movies_feature_engineered.csv`: Output of feature selection used in models
+
+> 📌 As part of the preprocessing phase, we performed **feature selection** on the `new_movies.csv` file to extract relevant numerical and genre-based features.  
+> The output is saved in `movies_feature_engineered.csv` and later used in content-based and hybrid recommendation models.
 
 
 
@@ -95,19 +109,6 @@ $ pip install -r requirements.txt
   - View your full rating history
   - See insights like average rating, preferred genres, etc.
 
-## 📁 Dataset
-
-- **Source**: [MovieLens  Dataset (100k ratings)](https://grouplens.org/datasets/movielens/)
-- **Contents**:
-  - `user_metadata.csv`: User IDs and avg ratings, ..etc
-  - `movies.csv`: Movie metadata (title, genres)
-  - `ratings.csv`: User-item rating matrix
-  - `new_movies.csv`: Preprocessed movie features (before feature selection)
-  - `movies_feature_engineered.csv`: Output of feature selection used in models
-
-> 📌 As part of the preprocessing phase, we performed **feature selection** on the `new_movies.csv` file to extract relevant numerical and genre-based features.  
-> The output is saved in `movies_feature_engineered.csv` and later used in content-based and hybrid recommendation models.
-
 
 ## Project Structure
 
@@ -173,11 +174,13 @@ Movies-Recommendation-System/
 
 ## ▶️ How to Run the App
 
+Activate the conda environment
 ```bash
-# Activate the conda environment
 conda activate myenv
+```
 
-# Run the Flask app
+Run the Flask app
+```bash
 python run.py
 ```
 
