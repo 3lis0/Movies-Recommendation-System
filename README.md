@@ -10,11 +10,21 @@ Build an interactive system that:
 - Allows users to browse others' preferences for inspiration (inspired by apps like Spotify/Anghami)
 - Offers intuitive UI for navigating recommendations
 
-## 👥 **Team Members**  
-🔹 Israa Abdelghany  
-🔹 Ali Adel  
-🔹 Ali Salama  
-🔹 Omar Ayman
+
+## 👥 Team Members
+
+- **Israa Abdelghany**  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](www.linkedin.com/in/israa-abdelghany) [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat&logo=github)](https://github.com/IsraaAbdelghany9)
+
+- **Ali Adel**  
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/ali-adel-84b390101) [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat&logo=github)](https://github.com/adelian14)
+
+- **Ali Salama**  
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/ali-salama) [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat&logo=github)](https://github.com/3lis0)
+
+- **Omar Ayman**  
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/omar-elgema3y) [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat&logo=github)](https://github.com/OmarrAymann)
+
 
 
 ## ⚙️ Environment Setup with Conda
