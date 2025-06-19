@@ -1,4 +1,4 @@
-# ipykernel==6.29.5
+ipykernel==6.29.5
 scikit-learn==1.6.1           ### To match py3.9
 pandas==2.3.0                 ### To match py3.9
 matplotlib==3.9.4             ### To match py3.9
