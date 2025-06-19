@@ -1,18 +1,21 @@
 #  🎬 Movies-Recommendation-System
 
- This project is a movie recommender system built using the MovieLens dataset. It includes two main features: personalized user recommendations using advanced models like Neural Collaborative Filtering,  
- and item-based similarity recommendations using cosine similarity. A user-friendly dashboard allows users to view their top-N recommended movies, explore item metadata, and find similar items. The 
- system is designed for educational purposes and demonstrates the full pipeline—from data preprocessing and model training to interactive UI deployment.
-
+This project is a movie recommender system built using the MovieLens dataset. It includes two main features: personalized user recommendations using collaborative filtering models like Factorization Machines and LightFM, and item-based similarity recommendations using cosine similarity. A user-friendly dashboard allows users to explore top-N movie recommendations, view other users' preferences, and interact with movie metadata. This system is designed for educational purposes and demonstrates a complete pipeline—from data processing to model deployment. 
 
 ## 📌 Objective
 
 Build an interactive system that:
 - Recommends top-N items to a selected user using advanced recommendation models.
-- Shows item-level metadata and retrieves similar items using an item similarity engine.
-- Offers intuitive UI components for navigating through both user and item recommendations.
+- Displays movie metadata and retrieves similar items based on similarity scores
+- Allows users to browse others' preferences for inspiration (inspired by apps like Spotify/Anghami)
+- Offers intuitive UI for navigating recommendations
 
----
+## 👥 **Team Members**  
+🔹 Israa Abdelghany  
+🔹 Ali Adel  
+🔹 Ali Salama  
+🔹 Omar Ayman
+
 
 ## ⚙️ Environment Setup with Conda
 
@@ -41,7 +44,6 @@ conda activate myenv
 $ pip install -r requirements.txt
 ```
 
----
 ## Models & Techniques
 
 ### 🔹 User Recommender
@@ -55,36 +57,49 @@ $ pip install -r requirements.txt
 - **Runtime**: Computed dynamically when an item is selected
 - **Output**: Top-N similar items for the selected movie
 
----
 
-## UI Components
+## 🖥️ UI Components
 
-### 🔸 User Page
-- **User Selector**: Dropdown to choose from unique user IDs
-- **User History View**: Displays previously rated items and ratings
-- **Top-N Parameter**: Input to choose how many recommendations to display per page
-- **Recommendations Viewer**: Paginated list of recommended items
-- **Navigation Controls**: Buttons for next/previous pages and direct page jumps
+### 🔸 Movies Page (Home)
+- **Genre Filter**: Filter movies using the genre dropdown.
+- **Sort Options**: Sort by rating in ascending/descending order.
+- **Navigation Bar**:
+  - Before login: `Login` and `Sign Up` buttons.
+  - After login: shows username and `Logout` button.
+- **Movie Cards** display:
+  - Poster, title, release year, genres, and average rating.
 
-### 🔸 Item Page
-- **Item Selector**: Dropdown to choose from available items
-- **Item Profile**: Displays metadata (e.g., title, genre, year)
-- **Top-N Similar Items**: Paginated list of most similar items
-- **Navigation Controls**: Navigate through similar item suggestions
+### 🔸 Movie Details Page
+- When you open any movie:
+  - You can **rate it directly**.
+  - You will see a **“You May Also Like”** section below it with related/similar movies based on content or collaborative filtering.
 
----
+### 🔸 Users List Page
+- Explore a list of public users (`User1`, `User2`, etc.).
+- View their top-rated movies and rating behavior.
+- Feature inspired by social discovery systems (e.g., **Spotify**, **Anghami**), where you can explore others' preferences.
+
+### 🔸 Profile Page *(Coming Soon 🚧)*
+- The tab is shown in the navbar but not functional yet.
+- Planned features:
+  - View your full rating history
+  - See insights like average rating, preferred genres, etc.
 
 ## 📁 Dataset
 
 - **Source**: [MovieLens  Dataset (100k ratings)](https://grouplens.org/datasets/movielens/)
 - **Contents**:
-  - `users.csv`: User IDs and demographics
+  - `user_metadata.csv`: User IDs and avg ratings, ..etc
   - `movies.csv`: Movie metadata (title, genres)
   - `ratings.csv`: User-item rating matrix
+  - `new_movies.csv`: Preprocessed movie features (before feature selection)
+  - `movies_feature_engineered.csv`: Output of feature selection used in models
 
----
+> 📌 As part of the preprocessing phase, we performed **feature selection** on the `new_movies.csv` file to extract relevant numerical and genre-based features.  
+> The output is saved in `movies_feature_engineered.csv` and later used in content-based and hybrid recommendation models.
 
-## Project Tree 
+
+## Project Structure
 
 ```bash 
 Movies-Recommendation-System/
@@ -146,7 +161,6 @@ Movies-Recommendation-System/
 ``` 
 
 
----
 ## ▶️ How to Run the App
 
 ```bash
@@ -155,4 +169,25 @@ conda activate myenv
 
 # Run the Flask app
 python run.py
----
+```
+
+
+## 📽️ Demo
+
+Here’s a brief walkthrough of how the system works:
+
+- 🔐 **Logged in** using our secure authentication system  
+- 🎞️ **Explored movies** like _Interstellar_ (a personal favorite!) and _Harry Potter_ (who doesn’t love it?)  
+- ⭐ **Rated movies** directly from the interface  
+- 🎯 **You may also like** section appears under each movie with smart recommendations based on rating and similarity scores.
+- 👤 **"Profile" tab** — _Feature coming soon, insha’Allah!_ It will display personal rating history, stats, and personalized insights
+
+📺 **[Watch the demo video →](#)**  
+
+
+
+## 🔮 What’s Next
+
+- 👤 **User Profile Page**: View rating history, average ratings, and genres preference  
+- 📊 **Dashboard Insights**: User-specific charts showing top genres, rating trends  
+- 🌐 **Public Deployment**: Stable hosted version for public access  
