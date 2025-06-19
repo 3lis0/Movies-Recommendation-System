@@ -14,37 +14,24 @@ Build an interactive system that:
 
 ---
 
-## Install Python 
+## ⚙️ Environment Setup with Conda
 
-### 🐍 How to Install Python
+> We used **conda** because `pip` alone can't manage different Python versions smoothly. `conda` allows creating isolated environments with specific Python versions, avoiding conflicts.
 
-#### 🔹 Step 1: Download Python
-- Go to the official website: https://www.python.org/downloads/
-- Click "Download Python 3.x.x" (latest version)
+### 🔹 Step 1: Install Conda (Miniconda)
+- Download Miniconda: https://docs.conda.io/en/latest/miniconda.html
+- Choose the version for your OS (Linux/macOS/Windows)
 
-#### 🔹 Step 2: Install Python
-
-##### On Windows:
-1. Run the installer.
-2. Check the box that says "Add Python to PATH".
-3. Click "Install Now".
-
-##### On Ubuntu/Linux:
+### 🔹 Step 2: Create a virtual environment with Python 3.9
 ```bash
-sudo apt update
-sudo apt install python3 python3-pip
+conda create -n myenv python=3.9
 ```
 
-##### On macOS (using Homebrew):
+### 🔹 Step 3: Activate the environment
 ```bash
-brew install python3
+conda activate myenv
 ```
 
-#### 🔹 Step 3: Verify Installation
-```bash
-python3 --version
-pip3 --version
-```
 
 ## Installation
 
@@ -53,6 +40,7 @@ pip3 --version
 ```bash
 $ pip install -r requirements.txt
 ```
+
 ---
 ## Models & Techniques
 
