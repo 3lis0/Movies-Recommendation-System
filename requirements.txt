@@ -5,8 +5,8 @@ matplotlib==3.9.4             ### To match py3.9
 requests==2.32.4
 python-dotenv==1.1.0
 Flask==3.1.1
-Flask-SQLAlchemy
-flask-login
-lightfm
-streamlit==1.46.0
+Flask-SQLAlchemy==3.1.1
+flask-login==0.6.3
+lightfm==1.17
+# streamlit==1.46.0
 torch==2.7.1
